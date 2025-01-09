@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Steg'Engine - Documentation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-indigo-600 text-white shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-2">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <a href="index.html" class="text-2xl font-bold flex items-center">
+                        <img src="ressources/stegengineSVG.svg" alt="Logo" class="h-8 mr-2">
+                        Steg'Engine
+                    </a>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="hover:text-indigo-200 transition">Accueil</a>
+                    <a href="#" class="text-indigo-200">Documentation</a>
+                    <a href="#" class="hover:text-indigo-200 transition">À propos</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-6 py-8 flex">
+        <!-- Sidebar Navigation -->
+        <div class="hidden lg:block w-64 pr-8 space-y-4 sticky top-24 self-start">
+            <div class="bg-white rounded-lg shadow p-4">
+                <h3 class="font-semibold text-gray-700 mb-3">Table des matières</h3>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="#introduction" class="text-indigo-600 hover:text-indigo-800">Introduction</a></li>
+                    <li><a href="#image-steg" class="text-indigo-600 hover:text-indigo-800">Stéganographie d'Image</a></li>
+                    <li><a href="#audio-steg" class="text-indigo-600 hover:text-indigo-800">Stéganographie Audio</a></li>
+                    <li><a href="#text-steg" class="text-indigo-600 hover:text-indigo-800">Stéganographie de Texte</a></li>
+                    <li><a href="#pdf-steg" class="text-indigo-600 hover:text-indigo-800">Stéganographie PDF</a></li>
+                    <li><a href="#security" class="text-indigo-600 hover:text-indigo-800">Sécurité et Bonnes Pratiques</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex-1 max-w-4xl">
+            <!-- Introduction -->
+            <section id="introduction" class="bg-white rounded-lg shadow-md p-8 mb-8">
+                <h1 class="text-3xl font-bold text-gray-800 mb-6">Documentation Steg'Engine</h1>
+                <div class="prose max-w-none">
+                    <h2 class="text-2xl font-semibold text-gray-700 mb-4">Qu'est-ce que la stéganographie ?</h2>
+                    <p class="text-gray-600 mb-4">
+                        La stéganographie est l'art de dissimuler des informations dans un support apparemment anodin. 
+                        Contrairement au chiffrement qui rend un message illisible, la stéganographie cache l'existence même du message.
+                    </p>
+                    <div class="bg-indigo-50 border-l-4 border-indigo-500 p-4 mb-4">
+                        <p class="text-sm text-indigo-700">
+                            <strong>Exemple simple :</strong> Imaginez que vous écriviez une lettre et que vous utilisiez certains 
+                            mots en gras pour former un message secret. Le message principal reste lisible, mais cache un second message.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Image Steganography -->
+            <section id="image-steg" class="bg-white rounded-lg shadow-md p-8 mb-8">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-6">Stéganographie d'Image</h2>
+                
+                <div class="space-y-6">
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-700 mb-3">La méthode LSB (Least Significant Bit)</h3>
+                        <p class="text-gray-600 mb-4">
+                            Cette technique modifie le bit le moins significatif des pixels d'une image pour y cacher des données. 
+                            Ces modifications sont imperceptibles à l'œil nu.
+                        </p>
+                        <div class="grid md:grid-cols-2 gap-4 mb-4">
+                            <div class="bg-gray-50 p-4 rounded-lg">
+                                <h4 class="font-semibold mb-2">Avant modification</h4>
+                                <p class="text-sm font-mono">Pixel: 11101010</p>
+                                <p class="text-xs text-gray-500">Le dernier bit sera modifié</p>
+                            </div>
+                            <div class="bg-gray-50 p-4 rounded-lg">
+                                <h4 class="font-semibold mb-2">Après modification</h4>
+                                <p class="text-sm font-mono">Pixel: 11101011</p>
+                                <p class="text-xs text-gray-500">Le dernier bit contient maintenant une donnée cachée</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4">
+                        <h4 class="font-semibold text-yellow-800">Conseils pour de meilleurs résultats :</h4>
+                        <ul class="list-disc list-inside text-sm text-yellow-700 mt-2">
+                            <li>Utilisez des images de haute qualité</li>
+                            <li>Préférez les formats sans perte (PNG)</li>
+                            <li>Évitez les images très uniformes</li>
+                            <li>Ne modifiez pas l'image après l'encodage</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Audio Steganography -->
+            <section id="audio-steg" class="bg-white rounded-lg shadow-md p-8 mb-8">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-6">Stéganographie Audio</h2>
+                
+                <div class="space-y-6">
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-700 mb-3">Principales Techniques</h3>
+                        
+                        <div class="space-y-4">
+                            <div class="border-l-4 border-indigo-200 pl-4">
+                                <h4 class="font-semibold mb-2">1. LSB Audio</h4>
+                                <p class="text-gray-600 text-sm">
+                                    Similaire à la technique LSB des images, mais appliquée aux échantillons audio.
+                                    Les modifications sont imperceptibles à l'oreille humaine.
+                                </p>
+                            </div>
+
+                            <div class="border-l-4 border-indigo-300 pl-4">
+                                <h4 class="font-semibold mb-2">2. Echo Hiding</h4>
+                                <p class="text-gray-600 text-sm">
+                                    Introduit de petits échos dans le signal audio. Les variations dans le délai
+                                    et l'amplitude de ces échos permettent d'encoder des données.
+                                </p>
+                            </div>
+
+                            <div class="border-l-4 border-indigo-400 pl-4">
+                                <h4 class="font-semibold mb-2">3. Phase Coding</h4>
+                                <p class="text-gray-600 text-sm">
+                                    Modifie la phase du signal audio initial pour encoder l'information,
+                                    tout en maintenant les relations de phase entre les canaux.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-blue-50 p-4 rounded-lg">
+                        <h4 class="font-semibold text-blue-800 mb-2">Considérations importantes :</h4>
+                        <ul class="list-disc list-inside text-sm text-blue-700">
+                            <li>La qualité du fichier audio influence la capacité de stockage</li>
+                            <li>Les formats compressés (MP3) peuvent détruire les données cachées</li>
+                            <li>Le bruit de fond peut aider à masquer les modifications</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Text Steganography -->
+            <section id="text-steg" class="bg-white rounded-lg shadow-md p-8 mb-8">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-6">Stéganographie de Texte</h2>
+                
+                <div class="space-y-6">
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-700 mb-3">Méthodes de Dissimulation</h3>
+                        
+                        <div class="grid md:grid-cols-2 gap-4 mb-6">
+                            <div class="bg-gray-50 p-4 rounded-lg">
+                                <h4 class="font-semibold mb-2">Espaces Blancs</h4>
+                                <p class="text-sm text-gray-600">
+                                    Utilise différentes combinaisons d'espaces, tabulations et retours à la ligne
+                                    pour encoder l'information.
+                                </p>
+                            </div>
+                            <div class="bg-gray-50 p-4 rounded-lg">
+                                <h4 class="font-semibold mb-2">Caractères Unicode</h4>
+                                <p class="text-sm text-gray-600">
+                                    Exploite les variations de caractères et les caractères invisibles
+                                    pour cacher des données.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="bg-green-50 border-l-4 border-green-400 p-4 mb-4">
+                            <h4 class="font-semibold text-green-800">Exemple pratique :</h4>
+                            <p class="text-sm text-green-700 mt-2">
+                                Le texte "Bonjour" peut contenir des espaces doubles après certains mots pour
+                                encoder des bits (1 pour double espace, 0 pour espace simple).
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PDF Steganography -->
+            <section id="pdf-steg" class="bg-white rounded-lg shadow-md p-8 mb-8">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-6">Stéganographie PDF</h2>
+                
+                <div class="space-y-6">
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-700 mb-3">Techniques Spécifiques aux PDF</h3>
+                        
+                        <div class="space-y-4">
+                            <div class="border p-4 rounded-lg">
+                                <h4 class="font-semibold mb-2">Métadonnées</h4>
+                                <p class="text-sm text-gray-600">
+                                    Les PDF contiennent des champs de métadonnées qui peuvent être utilisés
+                                    pour stocker des informations de manière discrète.
+                                </p>
+                            </div>
+
+                            <div class="border p-4 rounded-lg">
+                                <h4 class="font-semibold mb-2">Annotations Cachées</h4>
+                                <p class="text-sm text-gray-600">
+                                    Les PDF permettent d'ajouter des annotations invisibles qui peuvent
+                                    contenir des données cachées.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Security Section -->
+            <section id="security" class="bg-white rounded-lg shadow-md p-8 mb-8">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-6">Sécurité et Bonnes Pratiques</h2>
+                
+                <div class="space-y-6">
+                    <div class="bg-red-50 border-l-4 border-red-400 p-4">
+                        <h4 class="font-semibold text-red-800">Points importants à retenir :</h4>
+                        <ul class="list-disc list-inside text-sm text-red-700 mt-2">
+                            <li>La stéganographie seule n'est pas un moyen de chiffrement</li>
+                            <li>Combinez toujours avec un chiffrement fort pour les données sensibles</li>
+                            <li>Évitez de réutiliser les mêmes fichiers porteurs</li>
+                            <li>Gardez privés vos fichiers porteurs originaux</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h4 class="font-semibold mb-2">Recommandations de Sécurité</h4>
+                        <ul class="list-disc list-inside text-sm text-gray-600">
+                            <li>Utilisez le chiffrement AES proposé dans les options</li>
+                            <li>Choisissez des mots de passe forts et uniques</li>
+                            <li>Variez les méthodes et les supports utilisés</li>
+                            <li>Effacez les fichiers temporaires après utilisation</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white mt-16">
+        <div class="container mx-auto px-6 py-8">
+            <div class="text-center">
+                <p>&copy; 2024 Steg'Engine. Brought to life by <a href="https://github.com/aent0n" class="hover:text-indigo-400 transition">aent0n</a></p>
+                <div class="mt-4 space-x-4">
+                    <a href="#" class="hover:text-indigo-400 transition">Politique de Confidentialité</a>
+                    <a href="#" class="hover:text-indigo-400 transition">Conditions de Service</a>
+                    <a href="#" class="hover:text-indigo-400 transition">Contact</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html> 

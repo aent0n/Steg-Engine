@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Steg'Engine - Stéganographie Audio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-indigo-600 text-white shadow-lg">
+        <div class="container mx-auto px-6 py-2">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <a href="index.html" class="text-2xl font-bold flex items-center">
+                        <img src="ressources/stegengineSVG.svg" alt="Logo" class="h-8 mr-2">
+                        Steg'Engine
+                    </a>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="hover:text-indigo-200 transition">Accueil</a>
+                    <a href="#" class="hover:text-indigo-200 transition">Documentation</a>
+                    <a href="#" class="hover:text-indigo-200 transition">À propos</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-8">
+        <div class="text-center mb-8">
+            <h1 class="text-3xl font-bold text-gray-800 mb-4">Stéganographie Audio</h1>
+            <p class="text-gray-600">Dissimulez vos messages dans des fichiers audio en utilisant des techniques avancées</p>
+        </div>
+
+        <!-- Tool Container -->
+        <div class="grid md:grid-cols-2 gap-8">
+            <!-- Encode Section -->
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-xl font-semibold mb-4 flex items-center">
+                    <i class="fas fa-lock text-indigo-600 mr-2"></i>
+                    Encoder
+                </h2>
+                <div class="space-y-4">
+                    <!-- Audio Upload -->
+                    <div class="border-2 border-dashed border-gray-300 rounded-lg p-6">
+                        <div class="text-center">
+                            <i class="fas fa-music text-gray-400 text-3xl mb-2"></i>
+                            <p class="text-gray-500">Glissez-déposez votre fichier audio ici</p>
+                            <p class="text-sm text-gray-400 mb-2">ou</p>
+                            <input type="file" id="audioInput" class="hidden" accept="audio/*">
+                            <button onclick="document.getElementById('audioInput').click()" 
+                                    class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">
+                                Choisir un fichier
+                            </button>
+                        </div>
+                        <div id="audioPreview" class="mt-4 hidden">
+                            <audio id="previewAudio" controls class="w-full"></audio>
+                        </div>
+                    </div>
+
+                    <!-- Message Input -->
+                    <div>
+                        <label class="block text-gray-700 mb-2">Message Secret</label>
+                        <textarea class="w-full border rounded-lg p-2 focus:ring-2 focus:ring-indigo-600 focus:outline-none" 
+                                rows="4" 
+                                placeholder="Entrez votre message secret..."></textarea>
+                    </div>
+
+                    <!-- Options -->
+                    <div>
+                        <label class="block text-gray-700 mb-2">Options d'Encodage</label>
+                        <div class="space-y-2">
+                            <label class="flex items-center">
+                                <input type="checkbox" class="form-checkbox text-indigo-600">
+                                <span class="ml-2">Chiffrement AES</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="form-checkbox text-indigo-600">
+                                <span class="ml-2">Compression des données</span>
+                            </label>
+                            <div class="mt-4">
+                                <label class="block text-gray-700 mb-2">Méthode d'encodage</label>
+                                <select class="w-full border rounded-lg p-2 focus:ring-2 focus:ring-indigo-600 focus:outline-none">
+                                    <option value="lsb">LSB (Least Significant Bit)</option>
+                                    <option value="echo">Echo Hiding</option>
+                                    <option value="phase">Phase Coding</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="w-full bg-indigo-600 text-white py-2 rounded-lg hover:bg-indigo-700 transition">
+                        Encoder et Télécharger
+                    </button>
+                </div>
+            </div>
+
+            <!-- Decode Section -->
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-xl font-semibold mb-4 flex items-center">
+                    <i class="fas fa-unlock text-indigo-600 mr-2"></i>
+                    Décoder
+                </h2>
+                <div class="space-y-4">
+                    <!-- Audio Upload -->
+                    <div class="border-2 border-dashed border-gray-300 rounded-lg p-6">
+                        <div class="text-center">
+                            <i class="fas fa-music text-gray-400 text-3xl mb-2"></i>
+                            <p class="text-gray-500">Glissez-déposez le fichier audio à décoder</p>
+                            <p class="text-sm text-gray-400 mb-2">ou</p>
+                            <input type="file" id="decodeAudioInput" class="hidden" accept="audio/*">
+                            <button onclick="document.getElementById('decodeAudioInput').click()" 
+                                    class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">
+                                Choisir un fichier
+                            </button>
+                        </div>
+                        <div id="decodeAudioPreview" class="mt-4 hidden">
+                            <audio id="decodePreviewAudio" controls class="w-full"></audio>
+                        </div>
+                    </div>
+
+                    <!-- Decoded Message -->
+                    <div>
+                        <label class="block text-gray-700 mb-2">Message Décodé</label>
+                        <div class="w-full border rounded-lg p-4 bg-gray-50 min-h-[100px]">
+                            <p class="text-gray-400 italic">Le message décodé apparaîtra ici...</p>
+                        </div>
+                    </div>
+
+                    <button class="w-full bg-indigo-600 text-white py-2 rounded-lg hover:bg-indigo-700 transition">
+                        Décoder le Message
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Information Section -->
+        <div class="mt-12 bg-white rounded-lg shadow-md p-6">
+            <h2 class="text-xl font-semibold mb-4">Comment ça marche ?</h2>
+            <div class="space-y-4 text-gray-600">
+                <p>La stéganographie audio utilise différentes techniques pour cacher des données dans les fichiers audio tout en préservant la qualité sonore.</p>
+                <div class="grid md:grid-cols-3 gap-4 mt-4">
+                    <div class="border rounded-lg p-4">
+                        <h3 class="font-semibold mb-2">1. LSB (Least Significant Bit)</h3>
+                        <p class="text-sm">Modifie les bits les moins significatifs des échantillons audio pour cacher l'information.</p>
+                    </div>
+                    <div class="border rounded-lg p-4">
+                        <h3 class="font-semibold mb-2">2. Echo Hiding</h3>
+                        <p class="text-sm">Introduit des échos imperceptibles dans le signal audio pour encoder les données.</p>
+                    </div>
+                    <div class="border rounded-lg p-4">
+                        <h3 class="font-semibold mb-2">3. Phase Coding</h3>
+                        <p class="text-sm">Modifie la phase du signal audio pour cacher l'information tout en préservant l'amplitude.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white mt-16">
+        <div class="container mx-auto px-6 py-8">
+            <div class="text-center">
+                <p>&copy; 2024 Steg'Engine. Brought to life by <a href="https://github.com/aent0n" class="hover:text-indigo-400 transition">aent0n</a></p>
+                <div class="mt-4 space-x-4">
+                    <a href="#" class="hover:text-indigo-400 transition">Politique de Confidentialité</a>
+                    <a href="#" class="hover:text-indigo-400 transition">Conditions de Service</a>
+                    <a href="#" class="hover:text-indigo-400 transition">Contact</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html> 

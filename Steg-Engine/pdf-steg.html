@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Steg'Engine - Stéganographie PDF</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-indigo-600 text-white shadow-lg">
+        <div class="container mx-auto px-6 py-2">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <a href="index.html" class="text-2xl font-bold flex items-center">
+                        <img src="ressources/stegengineSVG.svg" alt="Logo" class="h-8 mr-2">
+                        Steg'Engine
+                    </a>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="hover:text-indigo-200 transition">Accueil</a>
+                    <a href="#" class="hover:text-indigo-200 transition">Documentation</a>
+                    <a href="#" class="hover:text-indigo-200 transition">À propos</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-8">
+        <div class="text-center mb-8">
+            <h1 class="text-3xl font-bold text-gray-800 mb-4">Stéganographie PDF</h1>
+            <p class="text-gray-600">Dissimulez vos données dans des documents PDF en utilisant des techniques avancées</p>
+        </div>
+
+        <!-- Tool Container -->
+        <div class="grid md:grid-cols-2 gap-8">
+            <!-- Encode Section -->
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-xl font-semibold mb-4 flex items-center">
+                    <i class="fas fa-lock text-indigo-600 mr-2"></i>
+                    Encoder
+                </h2>
+                <div class="space-y-4">
+                    <!-- PDF Upload -->
+                    <div class="border-2 border-dashed border-gray-300 rounded-lg p-6">
+                        <div class="text-center">
+                            <i class="fas fa-file-pdf text-gray-400 text-3xl mb-2"></i>
+                            <p class="text-gray-500">Glissez-déposez votre fichier PDF ici</p>
+                            <p class="text-sm text-gray-400 mb-2">ou</p>
+                            <input type="file" id="pdfInput" class="hidden" accept=".pdf">
+                            <button onclick="document.getElementById('pdfInput').click()" 
+                                    class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">
+                                Choisir un PDF
+                            </button>
+                        </div>
+                        <div id="pdfPreview" class="mt-4 hidden">
+                            <div class="flex items-center justify-between bg-gray-50 p-2 rounded">
+                                <span class="text-gray-600 truncate" id="pdfName">nom_du_fichier.pdf</span>
+                                <span class="text-gray-500 text-sm" id="pdfSize">0 MB</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Message Input -->
+                    <div>
+                        <label class="block text-gray-700 mb-2">Message Secret</label>
+                        <textarea class="w-full border rounded-lg p-2 focus:ring-2 focus:ring-indigo-600 focus:outline-none" 
+                                rows="4" 
+                                placeholder="Entrez votre message secret..."></textarea>
+                    </div>
+
+                    <!-- Options -->
+                    <div>
+                        <label class="block text-gray-700 mb-2">Méthode de Dissimulation</label>
+                        <select class="w-full border rounded-lg p-2 focus:ring-2 focus:ring-indigo-600 focus:outline-none mb-4">
+                            <option value="metadata">Métadonnées</option>
+                            <option value="spacing">Espacement des Caractères</option>
+                            <option value="invisible">Caractères Invisibles</option>
+                            <option value="annotations">Annotations Cachées</option>
+                        </select>
+
+                        <div class="space-y-2">
+                            <label class="flex items-center">
+                                <input type="checkbox" class="form-checkbox text-indigo-600">
+                                <span class="ml-2">Chiffrement AES</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="form-checkbox text-indigo-600">
+                                <span class="ml-2">Préserver les Signatures</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="form-checkbox text-indigo-600">
+                                <span class="ml-2">Protection contre l'Extraction</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <button class="w-full bg-indigo-600 text-white py-2 rounded-lg hover:bg-indigo-700 transition">
+                        Encoder et Télécharger
+                    </button>
+                </div>
+            </div>
+
+            <!-- Decode Section -->
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-xl font-semibold mb-4 flex items-center">
+                    <i class="fas fa-unlock text-indigo-600 mr-2"></i>
+                    Décoder
+                </h2>
+                <div class="space-y-4">
+                    <!-- PDF Upload -->
+                    <div class="border-2 border-dashed border-gray-300 rounded-lg p-6">
+                        <div class="text-center">
+                            <i class="fas fa-file-pdf text-gray-400 text-3xl mb-2"></i>
+                            <p class="text-gray-500">Glissez-déposez le PDF à décoder</p>
+                            <p class="text-sm text-gray-400 mb-2">ou</p>
+                            <input type="file" id="decodePdfInput" class="hidden" accept=".pdf">
+                            <button onclick="document.getElementById('decodePdfInput').click()" 
+                                    class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">
+                                Choisir un PDF
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Decoded Message with Analysis -->
+                    <div>
+                        <label class="block text-gray-700 mb-2">Résultats de l'Analyse</label>
+                        <div class="w-full border rounded-lg p-4 bg-gray-50 space-y-4">
+                            <!-- Message Section -->
+                            <div>
+                                <h3 class="font-semibold text-gray-700 mb-2">Message Décodé</h3>
+                                <div class="bg-white border rounded p-3">
+                                    <p class="text-gray-400 italic" id="decodedMessage">Le message décodé apparaîtra ici...</p>
+                                </div>
+                            </div>
+
+                            <!-- Analysis Details -->
+                            <div>
+                                <h3 class="font-semibold text-gray-700 mb-2">Détails de l'Analyse</h3>
+                                <div class="text-sm text-gray-600 space-y-2" id="analysisDetails">
+                                    <p class="italic">Les détails de l'analyse apparaîtront ici après le décodage...</p>
+                                    <!-- Les détails seront injectés dynamiquement via JavaScript -->
+                                    <!-- Exemple de structure :
+                                    <div class="space-y-1">
+                                        <p><span class="font-semibold">Méthode détectée :</span> Métadonnées</p>
+                                        <p><span class="font-semibold">Taille des données :</span> 1.2 KB</p>
+                                        <p><span class="font-semibold">Chiffrement détecté :</span> AES-256</p>
+                                    </div>
+                                    -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="w-full bg-indigo-600 text-white py-2 rounded-lg hover:bg-indigo-700 transition">
+                        Décoder le Message
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Information Section -->
+        <div class="mt-12 bg-white rounded-lg shadow-md p-6">
+            <h2 class="text-xl font-semibold mb-4">Comment ça marche ?</h2>
+            <div class="space-y-4 text-gray-600">
+                <p>La stéganographie PDF utilise plusieurs techniques pour cacher des données dans les documents PDF tout en préservant leur apparence et leur fonctionnalité.</p>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mt-4">
+                    <div class="border rounded-lg p-4">
+                        <h3 class="font-semibold mb-2">Métadonnées</h3>
+                        <p class="text-sm">Utilise les champs de métadonnées du PDF pour stocker des informations de manière discrète.</p>
+                    </div>
+                    <div class="border rounded-lg p-4">
+                        <h3 class="font-semibold mb-2">Espacement</h3>
+                        <p class="text-sm">Modifie subtilement l'espacement entre les caractères pour encoder des données.</p>
+                    </div>
+                    <div class="border rounded-lg p-4">
+                        <h3 class="font-semibold mb-2">Caractères Invisibles</h3>
+                        <p class="text-sm">Insère des caractères invisibles dans le document pour stocker l'information.</p>
+                    </div>
+                    <div class="border rounded-lg p-4">
+                        <h3 class="font-semibold mb-2">Annotations</h3>
+                        <p class="text-sm">Cache des données dans des annotations invisibles du document PDF.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white mt-16">
+        <div class="container mx-auto px-6 py-8">
+            <div class="text-center">
+                <p>&copy; 2024 Steg'Engine. Brought to life by <a href="https://github.com/aent0n" class="hover:text-indigo-400 transition">aent0n</a></p>
+                <div class="mt-4 space-x-4">
+                    <a href="#" class="hover:text-indigo-400 transition">Politique de Confidentialité</a>
+                    <a href="#" class="hover:text-indigo-400 transition">Conditions de Service</a>
+                    <a href="#" class="hover:text-indigo-400 transition">Contact</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html> 

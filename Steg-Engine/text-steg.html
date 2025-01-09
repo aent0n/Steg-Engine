@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Steg'Engine - Stéganographie de Texte</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-indigo-600 text-white shadow-lg">
+        <div class="container mx-auto px-6 py-2">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <a href="index.html" class="text-2xl font-bold flex items-center">
+                        <img src="ressources/stegengineSVG.svg" alt="Logo" class="h-8 mr-2">
+                        Steg'Engine
+                    </a>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="hover:text-indigo-200 transition">Accueil</a>
+                    <a href="#" class="hover:text-indigo-200 transition">Documentation</a>
+                    <a href="#" class="hover:text-indigo-200 transition">À propos</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-8">
+        <div class="text-center mb-8">
+            <h1 class="text-3xl font-bold text-gray-800 mb-4">Stéganographie de Texte</h1>
+            <p class="text-gray-600">Cachez vos messages dans du texte en utilisant diverses techniques linguistiques</p>
+        </div>
+
+        <!-- Tool Container -->
+        <div class="grid md:grid-cols-2 gap-8">
+            <!-- Encode Section -->
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-xl font-semibold mb-4 flex items-center">
+                    <i class="fas fa-lock text-indigo-600 mr-2"></i>
+                    Encoder
+                </h2>
+                <div class="space-y-4">
+                    <!-- Text Input -->
+                    <div>
+                        <label class="block text-gray-700 mb-2">Texte de Couverture</label>
+                        <textarea class="w-full border rounded-lg p-2 focus:ring-2 focus:ring-indigo-600 focus:outline-none" 
+                                rows="6" 
+                                placeholder="Entrez le texte qui servira de couverture..."></textarea>
+                    </div>
+
+                    <!-- Message Input -->
+                    <div>
+                        <label class="block text-gray-700 mb-2">Message Secret</label>
+                        <textarea class="w-full border rounded-lg p-2 focus:ring-2 focus:ring-indigo-600 focus:outline-none" 
+                                rows="4" 
+                                placeholder="Entrez votre message secret..."></textarea>
+                    </div>
+
+                    <!-- Options -->
+                    <div>
+                        <label class="block text-gray-700 mb-2">Méthode de Dissimulation</label>
+                        <select class="w-full border rounded-lg p-2 focus:ring-2 focus:ring-indigo-600 focus:outline-none mb-4">
+                            <option value="whitespace">Espaces Blancs</option>
+                            <option value="unicode">Caractères Unicode</option>
+                            <option value="syntactic">Variations Syntaxiques</option>
+                            <option value="semantic">Substitutions Sémantiques</option>
+                        </select>
+
+                        <div class="space-y-2">
+                            <label class="flex items-center">
+                                <input type="checkbox" class="form-checkbox text-indigo-600">
+                                <span class="ml-2">Chiffrement Supplémentaire</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="form-checkbox text-indigo-600">
+                                <span class="ml-2">Optimiser la Naturalité du Texte</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <button class="w-full bg-indigo-600 text-white py-2 rounded-lg hover:bg-indigo-700 transition">
+                        Encoder le Message
+                    </button>
+
+                    <!-- Result Preview -->
+                    <div>
+                        <label class="block text-gray-700 mb-2">Texte Encodé</label>
+                        <div class="w-full border rounded-lg p-4 bg-gray-50 min-h-[100px]">
+                            <p class="text-gray-400 italic">Le texte encodé apparaîtra ici...</p>
+                        </div>
+                        <button class="mt-2 w-full bg-gray-200 text-gray-700 py-2 rounded-lg hover:bg-gray-300 transition">
+                            Copier le Texte
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Decode Section -->
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-xl font-semibold mb-4 flex items-center">
+                    <i class="fas fa-unlock text-indigo-600 mr-2"></i>
+                    Décoder
+                </h2>
+                <div class="space-y-4">
+                    <!-- Text Input -->
+                    <div>
+                        <label class="block text-gray-700 mb-2">Texte à Décoder</label>
+                        <textarea class="w-full border rounded-lg p-2 focus:ring-2 focus:ring-indigo-600 focus:outline-none" 
+                                rows="8" 
+                                placeholder="Collez le texte contenant le message caché..."></textarea>
+                    </div>
+
+                    <!-- Options -->
+                    <div>
+                        <label class="block text-gray-700 mb-2">Options de Décodage</label>
+                        <div class="space-y-2">
+                            <label class="flex items-center">
+                                <input type="checkbox" class="form-checkbox text-indigo-600">
+                                <span class="ml-2">Déchiffrement Automatique</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="form-checkbox text-indigo-600">
+                                <span class="ml-2">Détection Automatique de la Méthode</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <button class="w-full bg-indigo-600 text-white py-2 rounded-lg hover:bg-indigo-700 transition">
+                        Décoder le Message
+                    </button>
+
+                    <!-- Decoded Message -->
+                    <div>
+                        <label class="block text-gray-700 mb-2">Message Décodé</label>
+                        <div class="w-full border rounded-lg p-4 bg-gray-50 min-h-[100px]">
+                            <p class="text-gray-400 italic">Le message décodé apparaîtra ici...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Information Section -->
+        <div class="mt-12 bg-white rounded-lg shadow-md p-6">
+            <h2 class="text-xl font-semibold mb-4">Comment ça marche ?</h2>
+            <div class="space-y-4 text-gray-600">
+                <p>La stéganographie de texte utilise diverses techniques linguistiques et typographiques pour dissimuler des informations dans un texte apparemment normal.</p>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mt-4">
+                    <div class="border rounded-lg p-4">
+                        <h3 class="font-semibold mb-2">Espaces Blancs</h3>
+                        <p class="text-sm">Utilise des combinaisons d'espaces, de tabulations et de retours à la ligne pour encoder l'information.</p>
+                    </div>
+                    <div class="border rounded-lg p-4">
+                        <h3 class="font-semibold mb-2">Caractères Unicode</h3>
+                        <p class="text-sm">Exploite les caractères invisibles ou les variations de caractères Unicode pour cacher des données.</p>
+                    </div>
+                    <div class="border rounded-lg p-4">
+                        <h3 class="font-semibold mb-2">Variations Syntaxiques</h3>
+                        <p class="text-sm">Modifie la structure des phrases tout en conservant leur sens pour encoder l'information.</p>
+                    </div>
+                    <div class="border rounded-lg p-4">
+                        <h3 class="font-semibold mb-2">Substitutions Sémantiques</h3>
+                        <p class="text-sm">Utilise des synonymes ou des variations d'expression pour cacher des bits d'information.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white mt-16">
+        <div class="container mx-auto px-6 py-8">
+            <div class="text-center">
+                <p>&copy; 2024 Steg'Engine. Brought to life by <a href="https://github.com/aent0n" class="hover:text-indigo-400 transition">aent0n</a></p>
+                <div class="mt-4 space-x-4">
+                    <a href="#" class="hover:text-indigo-400 transition">Politique de Confidentialité</a>
+                    <a href="#" class="hover:text-indigo-400 transition">Conditions de Service</a>
+                    <a href="#" class="hover:text-indigo-400 transition">Contact</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html> 

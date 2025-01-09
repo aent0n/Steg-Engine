@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Steg'Engine - Outil de Stéganographie</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-indigo-600 text-white shadow-lg">
+        <div class="container mx-auto px-6 py-2">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <span class="text-2xl font-bold">Steg'Engine</span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#" class="hover:text-indigo-200 transition">Accueil</a>
+                    <a href="documentation.html" class="hover:text-indigo-200 transition">Documentation</a>
+                    <a href="#" class="hover:text-indigo-200 transition">À propos</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-8">
+        <!-- Hero Section -->
+        <div class="flex mb-8">
+            <div>
+                <img src="ressources/stegengineSVG.svg" alt="Steg'Engine Logo" class="h-48 mr-3" />
+            </div>
+            <div class="text-center mb-12">
+                <h1 class="text-4xl font-bold text-gray-800 mb-4">
+                    Bienvenue sur Steg'Engine
+                </h1>
+                <div class=" ">
+                    <p class="text-gray-600 text-lg max-w-2xl mx-auto">
+                        Votre boîte à outils complète pour les opérations de stéganographie. Choisissez parmi notre variété d'outils 
+                        pour cacher et extraire des données en utilisant différentes techniques.
+                    </p>
+    
+                </div>
+            </div>
+        </div>
+
+        <!-- Tools Grid -->
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Image Steganography Tool -->
+            <div class="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                <div class="p-6">
+                    <div class="flex items-center justify-center h-16 w-16 bg-indigo-100 rounded-full mx-auto mb-4">
+                        <i class="fas fa-image text-2xl text-indigo-600"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-center mb-2">Stéganographie d'Image</h3>
+                    <p class="text-gray-600 text-center mb-4">
+                        Cacher des messages dans des images en utilisant la technique LSB
+                    </p>
+                    <div class="flex justify-center">
+                        <a href="image-steg.html" class="bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-700 transition">
+                            Lancer l'outil
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Audio Steganography Tool -->
+            <div class="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                <div class="p-6">
+                    <div class="flex items-center justify-center h-16 w-16 bg-indigo-100 rounded-full mx-auto mb-4">
+                        <i class="fas fa-music text-2xl text-indigo-600"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-center mb-2">Stéganographie Audio</h3>
+                    <p class="text-gray-600 text-center mb-4">
+                        Intégrer des données dans des fichiers audio
+                    </p>
+                    <div class="flex justify-center">
+                        <a href="audio-steg.html" class="bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-700 transition">
+                            Lancer l'outil
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Text Steganography Tool -->
+            <div class="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                <div class="p-6">
+                    <div class="flex items-center justify-center h-16 w-16 bg-indigo-100 rounded-full mx-auto mb-4">
+                        <i class="fas fa-file-alt text-2xl text-indigo-600"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-center mb-2">Stéganographie de Texte</h3>
+                    <p class="text-gray-600 text-center mb-4">
+                        Cacher des messages en utilisant des techniques basées sur le texte
+                    </p>
+                    <div class="flex justify-center">
+                        <a href="text-steg.html" class="bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-700 transition">
+                            Lancer l'outil
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PDF Steganography Tool -->
+            <div class="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                <div class="p-6">
+                    <div class="flex items-center justify-center h-16 w-16 bg-indigo-100 rounded-full mx-auto mb-4">
+                        <i class="fas fa-file-pdf text-2xl text-indigo-600"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-center mb-2">Stéganographie PDF</h3>
+                    <p class="text-gray-600 text-center mb-4">
+                        Cacher des données dans des documents PDF
+                    </p>
+                    <div class="flex justify-center">
+                        <a href="pdf-steg.html" class="bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-700 transition">
+                            Lancer l'outil
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Batch Processing Tool -->
+            <div class="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                <div class="p-6">
+                    <div class="flex items-center justify-center h-16 w-16 bg-indigo-100 rounded-full mx-auto mb-4">
+                        <i class="fas fa-layer-group text-2xl text-indigo-600"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-center mb-2">Traitement par Lots</h3>
+                    <p class="text-gray-600 text-center mb-4">
+                        Traiter plusieurs fichiers à la fois
+                    </p>
+                    <div class="flex justify-center">
+                        <button class="bg-gray-300 text-gray-600 px-6 py-2 rounded-lg cursor-not-allowed">
+                            À venir
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Features Section -->
+        <div class="mt-16">
+            <h2 class="text-2xl font-bold text-center text-gray-800 mb-8">Pourquoi Choisir Steg'Engine ?</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="text-center">
+                    <i class="fas fa-shield-alt text-4xl text-indigo-600 mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-2">Securisé & Privé</h3>
+                    <p class="text-gray-600">Tout le traitement se fait dans votre navigateur. Vos données restent avec vous.</p>
+                </div>
+                <div class="text-center">
+                    <i class="fas fa-tools text-4xl text-indigo-600 mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-2">Outils Multiples</h3>
+                    <p class="text-gray-600">Suite complète d'outils de stéganographie pour divers besoins</p>
+                </div>
+                <div class="text-center">
+                    <i class="fas fa-user-friends text-4xl text-indigo-600 mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-2">Facile à Utiliser</h3>
+                    <p class="text-gray-600">Interface simple et intuitive pour les débutants et les experts</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white mt-16">
+        <div class="container mx-auto px-6 py-8">
+            <div class="text-center">
+                <p>&copy; 2024 Steg'Engine. Brought to life by <a href="https://github.com/aent0n" class="hover:text-indigo-400 transition">aent0n</a></p>
+                <div class="mt-4 space-x-4">
+                    <a href="#" class="hover:text-indigo-400 transition">Politique de Confidentialité</a>
+                    <a href="#" class="hover:text-indigo-400 transition">Conditions de Service</a>
+                    <a href="#" class="hover:text-indigo-400 transition">Contact</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
