@@ -32,13 +32,13 @@ Steg'Engine est une suite d'outils de stéganographie moderne et intuitive, perm
 ## 🚀 Installation
 
 1. Clonez le repository : 
-```bash
-git clone https://github.com/aent0n/Steg-Engine.git```
+``bash
+git clone https://github.com/aent0n/Steg-Engine.git``
 
 2. Accédez au répertoire :
 
-```bash
-cd Steg-Engine```
+``bash
+cd Steg-Engine``
 
 
 3. Ouvrez `index.html` dans votre navigateur ou utilisez un serveur local.
@@ -68,7 +68,7 @@ Une documentation complète est disponible directement dans l'application, expli
 ## 🛠️ Développement
 
 ### Structure du Projet
-```
+``
 Steg-Engine/
 ├── index.html
 ├── documentation.html
@@ -79,7 +79,7 @@ Steg-Engine/
 ├── script.js
 └── ressources/
     └── stegengineSVG.svg
-```
+``
 
 
 
