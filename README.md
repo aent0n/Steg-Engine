@@ -68,7 +68,7 @@ Une documentation complète est disponible directement dans l'application, expli
 ## 🛠️ Développement
 
 ### Structure du Projet
-``
+```
 Steg-Engine/
 ├── index.html
 ├── documentation.html
@@ -79,7 +79,7 @@ Steg-Engine/
 ├── script.js
 └── ressources/
     └── stegengineSVG.svg
-``
+```
 
 
 
