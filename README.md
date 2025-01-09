@@ -1,6 +1,6 @@
 # Steg'Engine 🛡️
 
-![Steg'Engine Logo](ressources/stegengineSVG.svg)
+![Steg'Engine Logo](ressources/stegengineSVG.svg | width=100)
 
 Steg'Engine est une suite d'outils de stéganographie moderne et intuitive, permettant de dissimuler des informations dans différents types de fichiers directement depuis votre navigateur.
 
