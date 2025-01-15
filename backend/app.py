@@ -44,42 +44,38 @@ def allowed_file(filename, file_type):
 # Routes pour la stéganographie d'image
 @app.route('/api/image/encode', methods=['POST'])
 def encode_image():
-    if 'file' not in request.files:
-        return jsonify({'error': 'No file provided'}), 400
-    
-    file = request.files['file']
-    message = request.form.get('message')
-    use_encryption = request.form.get('use_encryption', 'false') == 'true'
-    use_compression = request.form.get('use_compression', 'false') == 'true'
-    
-    if not message:
-        return jsonify({'error': 'No message provided'}), 400
-    
-    if file and allowed_file(file.filename, 'image'):
-        filename = secure_filename(file.filename)
-        filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-        file.save(filepath)
+    try:
+        # Vérifier si un fichier a été uploadé
+        if 'file' not in request.files:
+            return jsonify({'success': False, 'error': 'Aucun fichier trouvé'}), 400
         
-        try:
-            steg = ImageSteganography()
-            output_path = steg.encode(filepath, message, use_encryption, use_compression)
-            # Ne pas supprimer le fichier encodé
-            encoded_filename = os.path.basename(output_path)
-            file_url = f'/uploads/{encoded_filename}'
-            
-            # Nettoyer uniquement le fichier original
-            if os.path.exists(filepath):
-                os.remove(filepath)
-                
-            return jsonify({'success': True, 'file': file_url})
-        except Exception as e:
-            return jsonify({'error': str(e)}), 500
-        finally:
-            # Nettoyage du fichier original si encore présent
-            if os.path.exists(filepath):
-                os.remove(filepath)
-    
-    return jsonify({'error': 'Invalid file type'}), 400
+        file = request.files['file']
+        message = request.form.get('message', '')
+        use_encryption = request.form.get('use_encryption', 'false') == 'true'
+        use_compression = request.form.get('use_compression', 'false') == 'true'
+        
+        if not file or not message:
+            return jsonify({'success': False, 'error': 'Fichier ou message manquant'}), 400
+        
+        # Sauvegarder temporairement l'image
+        temp_path = os.path.join(app.config['UPLOAD_FOLDER'], secure_filename(file.filename))
+        file.save(temp_path)
+        
+        # Encoder le message dans l'image
+        steg = ImageSteganography()
+        output_path = steg.encode(temp_path, message, use_encryption, use_compression)
+        
+        # Nettoyer le fichier temporaire
+        os.remove(temp_path)
+        
+        # Retourner le chemin du fichier encodé
+        return jsonify({
+            'success': True,
+            'file': output_path.replace(app.config['UPLOAD_FOLDER'], '/uploads')
+        })
+        
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e)}), 500
 
 @app.route('/api/image/decode', methods=['POST'])
 def decode_image():

@@ -201,16 +201,10 @@ class ImageSteganographyHandler {
     }
 
     async handleEncode() {
-        console.log('Début de handleEncode');
         const file = this.encodeInput.files[0];
         const message = this.encodeMessage.value;
         const useEncryption = this.aesCheckbox.checked;
         const useCompression = this.compressionCheckbox.checked;
-
-        console.log('File:', file);
-        console.log('Message:', message);
-        console.log('Use Encryption:', useEncryption);
-        console.log('Use Compression:', useCompression);
 
         if (!file || !message) {
             this.showError('Veuillez sélectionner une image et entrer un message');
@@ -225,16 +219,12 @@ class ImageSteganographyHandler {
 
         try {
             this.showLoading(true);
-            console.log('Envoi de la requête à:', `${API_BASE_URL}/image/encode`);
             const response = await fetch(`${API_BASE_URL}/image/encode`, {
                 method: 'POST',
                 body: formData
             });
 
-            console.log('Réponse reçue:', response);
             const data = await response.json();
-            console.log('Données reçues:', data);
-
             if (data.success) {
                 // Créer un lien temporaire pour télécharger le fichier
                 const downloadUrl = `http://localhost:5000${data.file}`;
