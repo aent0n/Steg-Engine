@@ -16,7 +16,7 @@ Steg'Engine est une application web moderne de stéganographie, permettant de di
   - Chiffrement AES
  
   Démonstration:
-  ¨[Steg'Engine Démo LSB](frontend/ressources/demoVideo.p4)
+  ![Steg'Engine Démo LSB](frontend/ressources/demoVideo.p4)
 
 ## 🚀 Installation
 
