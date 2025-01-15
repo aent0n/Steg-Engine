@@ -18,6 +18,14 @@ class ImageSteganographyHandler {
         this.encodeButton = document.getElementById('encodeButton');
         this.aesCheckbox = document.getElementById('aesEncryption');
         this.compressionCheckbox = document.getElementById('dataCompression');
+        
+        // Éléments de statistiques
+        this.capacityIndicator = document.getElementById('capacityIndicator');
+        this.encodingStats = document.getElementById('encodingStats');
+        this.maxCapacity = document.getElementById('maxCapacity');
+        this.messageSize = document.getElementById('messageSize');
+        this.compressionRatio = document.getElementById('compressionRatio');
+        this.spaceUsed = document.getElementById('spaceUsed');
 
         // Éléments de décodage
         this.decodeInput = document.getElementById('decodeImageInput');
@@ -26,9 +34,14 @@ class ImageSteganographyHandler {
         this.decodePreviewImg = document.getElementById('decodePreviewImg');
         this.decodeButton = document.getElementById('decodeButton');
         this.decodeResult = document.getElementById('decodedMessage');
+        this.copyButton = document.getElementById('copyButton');
 
         // Bind des méthodes
         this.resetImageUpload = this.resetImageUpload.bind(this);
+        this.updateCapacityIndicator = this.updateCapacityIndicator.bind(this);
+        this.handleMessageInput = this.handleMessageInput.bind(this);
+        this.copyDecodedMessage = this.copyDecodedMessage.bind(this);
+        
         // Exposer la méthode resetImageUpload globalement
         window.resetImageUpload = this.resetImageUpload;
     }
@@ -37,10 +50,13 @@ class ImageSteganographyHandler {
         // Gestionnaires d'événements pour l'encodage
         this.encodeInput.addEventListener('change', (e) => this.handleImageSelect(e, true));
         this.encodeButton.addEventListener('click', () => this.handleEncode());
+        this.encodeMessage.addEventListener('input', this.handleMessageInput);
+        this.compressionCheckbox.addEventListener('change', this.handleMessageInput);
 
         // Gestionnaires d'événements pour le décodage
         this.decodeInput.addEventListener('change', (e) => this.handleImageSelect(e, false));
         this.decodeButton.addEventListener('click', () => this.handleDecode());
+        this.copyButton.addEventListener('click', this.copyDecodedMessage);
 
         // Gestion du drag & drop
         this.setupDragAndDrop();
@@ -90,6 +106,7 @@ class ImageSteganographyHandler {
                 this.encodeUploadState.classList.add('hidden');
                 this.encodeImagePreview.classList.remove('hidden');
                 this.encodePreviewImg.src = URL.createObjectURL(file);
+                this.calculateImageCapacity(file);
             } else {
                 this.decodeUploadState.classList.add('hidden');
                 this.decodeImagePreview.classList.remove('hidden');
@@ -97,6 +114,73 @@ class ImageSteganographyHandler {
             }
         } else {
             this.showError('Veuillez sélectionner une image valide');
+        }
+    }
+
+    async calculateImageCapacity(file) {
+        const img = new Image();
+        img.src = URL.createObjectURL(file);
+        await new Promise(resolve => img.onload = resolve);
+        
+        // Calculer la capacité en bits (1 bit par canal RGB par pixel)
+        const totalBits = img.width * img.height * 3;
+        // Convertir en caractères (8 bits par caractère)
+        const maxChars = Math.floor(totalBits / 8);
+        
+        this.maxCapacity.textContent = maxChars;
+        this.encodingStats.classList.remove('hidden');
+        this.updateCapacityIndicator();
+    }
+
+    handleMessageInput() {
+        this.updateCapacityIndicator();
+        this.updateCompressionStats();
+    }
+
+    async updateCompressionStats() {
+        const message = this.encodeMessage.value;
+        if (!message) {
+            this.compressionRatio.textContent = 'N/A';
+            return;
+        }
+
+        if (this.compressionCheckbox.checked) {
+            // Simuler la compression
+            const blob = new Blob([message]);
+            const compressed = await new Response(blob.stream().pipeThrough(new CompressionStream('gzip'))).blob();
+            const ratio = ((1 - compressed.size / blob.size) * 100).toFixed(1);
+            this.compressionRatio.textContent = `${ratio}% de réduction`;
+        } else {
+            this.compressionRatio.textContent = 'Désactivée';
+        }
+    }
+
+    updateCapacityIndicator() {
+        const currentLength = this.encodeMessage.value.length;
+        const maxLength = parseInt(this.maxCapacity.textContent) || 0;
+        
+        this.capacityIndicator.textContent = `${currentLength}/${maxLength} caractères`;
+        this.messageSize.textContent = currentLength;
+        
+        const usedPercentage = maxLength > 0 ? ((currentLength / maxLength) * 100).toFixed(1) : 0;
+        this.spaceUsed.textContent = `${usedPercentage}%`;
+        
+        // Mettre à jour les couleurs selon l'utilisation
+        if (currentLength > maxLength) {
+            this.capacityIndicator.className = 'absolute bottom-2 right-2 text-sm text-red-500';
+        } else if (currentLength > maxLength * 0.9) {
+            this.capacityIndicator.className = 'absolute bottom-2 right-2 text-sm text-orange-500';
+        } else {
+            this.capacityIndicator.className = 'absolute bottom-2 right-2 text-sm text-gray-500';
+        }
+    }
+
+    async copyDecodedMessage() {
+        try {
+            await navigator.clipboard.writeText(this.decodeResult.textContent);
+            this.showSuccess('Message copié dans le presse-papiers !');
+        } catch (err) {
+            this.showError('Impossible de copier le message');
         }
     }
 
@@ -199,6 +283,7 @@ class ImageSteganographyHandler {
             if (data.success) {
                 this.decodeResult.textContent = data.message;
                 this.decodeResult.classList.remove('text-gray-400', 'italic');
+                this.copyButton.classList.remove('hidden');
                 this.showSuccess('Message décodé avec succès !');
             } else {
                 this.showError(data.error || 'Aucun message trouvé dans l\'image');

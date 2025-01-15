@@ -78,10 +78,26 @@
                     <!-- Message Input -->
                     <div>
                         <label class="block text-gray-700 mb-2">Message Secret</label>
-                        <textarea id="secretMessage" 
-                                class="w-full border rounded-lg p-2 focus:ring-2 focus:ring-indigo-600 focus:outline-none" 
-                                rows="4" 
-                                placeholder="Entrez votre message secret..."></textarea>
+                        <div class="relative">
+                            <textarea id="secretMessage" 
+                                    class="w-full border rounded-lg p-2 focus:ring-2 focus:ring-indigo-600 focus:outline-none" 
+                                    rows="4" 
+                                    placeholder="Entrez votre message secret..."></textarea>
+                            <div id="capacityIndicator" class="absolute bottom-2 right-2 text-sm text-gray-500">
+                                0/0 caractères
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Encoding Stats -->
+                    <div id="encodingStats" class="hidden bg-gray-50 rounded-lg p-4 text-sm">
+                        <h3 class="font-semibold text-gray-700 mb-2">Statistiques</h3>
+                        <ul class="space-y-1 text-gray-600">
+                            <li>Capacité maximale: <span id="maxCapacity">0</span> caractères</li>
+                            <li>Taille du message: <span id="messageSize">0</span> caractères</li>
+                            <li>Compression: <span id="compressionRatio">N/A</span></li>
+                            <li>Espace utilisé: <span id="spaceUsed">0%</span></li>
+                        </ul>
                     </div>
 
                     <!-- Options -->
@@ -152,7 +168,12 @@
 
                     <!-- Decoded Message -->
                     <div>
-                        <label class="block text-gray-700 mb-2">Message Décodé</label>
+                        <label class="block text-gray-700 mb-2 flex justify-between items-center">
+                            <span>Message Décodé</span>
+                            <button id="copyButton" class="text-indigo-600 hover:text-indigo-800 text-sm hidden">
+                                <i class="fas fa-copy mr-1"></i>Copier
+                            </button>
+                        </label>
                         <div id="decodedMessageContainer" class="w-full border rounded-lg p-4 bg-gray-50 min-h-[100px] max-h-[300px] overflow-y-auto">
                             <p id="decodedMessage" class="text-gray-400 italic break-words whitespace-pre-wrap">Le message décodé apparaîtra ici...</p>
                         </div>
